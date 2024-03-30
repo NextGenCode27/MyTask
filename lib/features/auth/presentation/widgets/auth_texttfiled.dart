@@ -15,6 +15,7 @@ class AuthTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         border: InputBorder.none,
         enabledBorder: OutlineInputBorder(
@@ -48,6 +49,12 @@ class AuthTextFormField extends StatelessWidget {
       style: TextStyle(
         color: Theme.of(context).colorScheme.onBackground,
       ),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return '$hintText can not be empty.';
+        }
+        return null;
+      },
     );
   }
 }
