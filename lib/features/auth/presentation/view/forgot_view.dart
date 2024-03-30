@@ -70,6 +70,7 @@ class _ForgotViewState extends State<ForgotView> {
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                     },
                   ),
                 ],
