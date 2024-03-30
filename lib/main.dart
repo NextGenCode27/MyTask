@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_task/core/secrets/storage_secrets.dart';
 import 'package:my_task/core/services/storage_service.dart';
 import 'package:my_task/core/themes/dark_theme.dart';
 import 'package:my_task/core/themes/theme_bloc/theme_bloc.dart';
+import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_task/features/auth/presentation/view/welcome_view.dart';
 import 'package:my_task/init_dependencies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await iniDependencies();
-  final bool isDarkTheme =
-      await StorageService.getBool(key: 'isDarkTheme') ?? false;
+  final bool isDarkTheme = await StorageService.getBool(key: themeKey) ?? false;
 
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => serviceLocator<ThemeBloc>(),
-        ),
+        BlocProvider(create: (context) => serviceLocator<ThemeBloc>()),
+        BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
       ],
       child: MyApp(
         isDatkTheme: isDarkTheme,

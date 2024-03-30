@@ -12,6 +12,7 @@ class ForgotView extends StatefulWidget {
 
 class _ForgotViewState extends State<ForgotView> {
   final TextEditingController emailController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -47,9 +48,12 @@ class _ForgotViewState extends State<ForgotView> {
                   ),
                 ],
               ),
-              AuthTextFormField(
-                controller: emailController,
-                hintText: 'Email',
+              Form(
+                key: _formKey,
+                child: AuthTextFormField(
+                  controller: emailController,
+                  hintText: 'Email',
+                ),
               ),
               Column(
                 children: [
@@ -58,7 +62,9 @@ class _ForgotViewState extends State<ForgotView> {
                     lable: 'Send Email',
                     lableColor: Theme.of(context).colorScheme.onSurface,
                     backgroundColor: Theme.of(context).colorScheme.primary,
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {}
+                    },
                   ),
                   const SizedBox(
                     height: 20,

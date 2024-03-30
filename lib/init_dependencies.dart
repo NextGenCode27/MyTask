@@ -1,15 +1,30 @@
 import 'package:get_it/get_it.dart';
+import 'package:my_task/core/secrets/supabse_secrets.dart';
 import 'package:my_task/core/themes/data/data_source/local/theme_local_datasource.dart';
 import 'package:my_task/core/themes/data/repository/theme_repository_impl.dart';
 import 'package:my_task/core/themes/domain/repository/them_repository.dart';
 import 'package:my_task/core/themes/domain/usecase/get_theme_usecase.dart';
 import 'package:my_task/core/themes/domain/usecase/set_theme_usecase.dart';
 import 'package:my_task/core/themes/theme_bloc/theme_bloc.dart';
+import 'package:my_task/features/auth/data/data_source/remote/auth_remote_datasource.dart';
+import 'package:my_task/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:my_task/features/auth/domain/repository/auth_repository.dart';
+import 'package:my_task/features/auth/domain/usecase/login_usecase.dart';
+import 'package:my_task/features/auth/domain/usecase/register_usecase.dart';
+import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 GetIt serviceLocator = GetIt.instance;
 
 Future<void> iniDependencies() async {
   _initTheme();
+  _initAuth();
+  final supabase = await Supabase.initialize(
+    url: supabaseUrl,
+    anonKey: supabaseAnonKey,
+  );
+
+  serviceLocator.registerFactory<SupabaseClient>(() => supabase.client);
 }
 
 _initTheme() {
@@ -30,6 +45,28 @@ _initTheme() {
       () => ThemeBloc(
         setThemeUsecase: serviceLocator(),
         getThemeUsecase: serviceLocator(),
+      ),
+    );
+}
+
+_initAuth() {
+  serviceLocator
+    ..registerFactory<AuthRemoteDatasource>(
+      () => AuthRemoteDatasourceImpl(supabaseClient: serviceLocator()),
+    )
+    ..registerFactory<AuthRepository>(
+      () => AuthRepositoryImpl(authRemoteDatasource: serviceLocator()),
+    )
+    ..registerFactory<LoginUsecase>(
+      () => LoginUsecase(authRepository: serviceLocator()),
+    )
+    ..registerFactory(
+      () => RegisterUsecas(authRepository: serviceLocator()),
+    )
+    ..registerLazySingleton(
+      () => AuthBloc(
+        loginUsecase: serviceLocator(),
+        registerUsecas: serviceLocator(),
       ),
     );
 }

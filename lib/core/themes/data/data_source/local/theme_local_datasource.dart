@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_task/core/error/exception.dart';
+import 'package:my_task/core/secrets/storage_secrets.dart';
 import 'package:my_task/core/services/storage_service.dart';
 import 'package:my_task/core/themes/dark_theme.dart';
 import 'package:my_task/core/themes/light_theme.dart';
@@ -17,11 +18,11 @@ class ThemeLocalDatasourceImpl implements ThemeLocalDatasource {
     try {
       if (isDarkTheme == true) {
         isDarkTheme = false;
-        await StorageService.setBool(key: 'isDarkTheme', value: isDarkTheme);
+        await StorageService.setBool(key: themeKey, value: isDarkTheme);
         return lightTheme;
       } else if (isDarkTheme == false) {
         isDarkTheme = true;
-        await StorageService.setBool(key: 'isDarkTheme', value: isDarkTheme);
+        await StorageService.setBool(key: themeKey, value: isDarkTheme);
         return darkTheme;
       }
       return lightTheme;
@@ -33,7 +34,7 @@ class ThemeLocalDatasourceImpl implements ThemeLocalDatasource {
   @override
   Future<ThemeData> getTheme() async {
     final bool currentTheme =
-        await StorageService.getBool(key: 'isDarkTheme') ?? false;
+        await StorageService.getBool(key: themeKey) ?? false;
     try {
       if (currentTheme == true) {
         return darkTheme;
