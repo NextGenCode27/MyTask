@@ -11,7 +11,6 @@ void main() async {
   await iniDependencies();
   final bool isDarkTheme =
       await StorageService.getBool(key: 'isDarkTheme') ?? false;
-  print(isDarkTheme);
 
   runApp(
     MultiBlocProvider(

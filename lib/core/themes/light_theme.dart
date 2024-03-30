@@ -19,7 +19,7 @@ final ThemeData lightTheme = ThemeData(
     onTertiary: blackColor,
     outline: redColor,
     outlineVariant: greyColor,
-    inversePrimary: blackColor,
+    inversePrimary: whiteColor,
   ),
   scaffoldBackgroundColor: whiteColor,
   fontFamily: GoogleFonts.poppins().fontFamily,
