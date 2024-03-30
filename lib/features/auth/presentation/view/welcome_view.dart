@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/global/widgets/app_icon.dart';
 import 'package:my_task/core/global/widgets/custom_button.dart';
+import 'package:my_task/core/themes/light_theme.dart';
 import 'package:my_task/core/themes/theme_bloc/theme_bloc.dart';
+import 'package:my_task/features/auth/presentation/view/login_view.dart';
+import 'package:my_task/features/auth/presentation/view/register_view.dart';
 
 class WelcomeView extends StatefulWidget {
   const WelcomeView({super.key});
@@ -25,14 +28,42 @@ class _WelcomeViewState extends State<WelcomeView> {
             //dark mode icon
             Row(
               children: [
-                IconButton(
-                  onPressed: () {
-                    context.read<ThemeBloc>().add(SetThemeEvent());
+                BlocBuilder<ThemeBloc, ThemeState>(
+                  builder: (context, state) {
+                    if (state is ThemeGetSuccess) {
+                      return IconButton(
+                        onPressed: () {
+                          context.read<ThemeBloc>().add(SetThemeEvent());
+                        },
+                        icon: state.themeData == lightTheme
+                            ? Icon(
+                                Icons.dark_mode,
+                                color: Theme.of(context).colorScheme.secondary,
+                              )
+                            : Icon(
+                                Icons.light_mode_rounded,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                      );
+                    }
+                    if (state is ThemeSetSuccess) {
+                      return IconButton(
+                        onPressed: () {
+                          context.read<ThemeBloc>().add(SetThemeEvent());
+                        },
+                        icon: state.themeData == lightTheme
+                            ? Icon(
+                                Icons.dark_mode,
+                                color: Theme.of(context).colorScheme.secondary,
+                              )
+                            : Icon(
+                                Icons.light_mode_rounded,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                      );
+                    }
+                    return const SizedBox();
                   },
-                  icon: Icon(
-                    Icons.light_mode_rounded,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
                 ),
               ],
             ),
@@ -80,7 +111,9 @@ class _WelcomeViewState extends State<WelcomeView> {
                         lableColor: Theme.of(context).colorScheme.onSecondary,
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(LoginView.route());
+                        },
                       ),
                     ),
                     const SizedBox(
@@ -106,7 +139,9 @@ class _WelcomeViewState extends State<WelcomeView> {
                   lable: 'Become a member',
                   lableColor: Theme.of(context).colorScheme.onSurface,
                   backgroundColor: Theme.of(context).colorScheme.primary,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(RegisterView.route());
+                  },
                 )
               ],
             ),

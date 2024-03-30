@@ -1,0 +1,123 @@
+import 'package:flutter/material.dart';
+import 'package:my_task/core/global/widgets/custom_button.dart';
+import 'package:my_task/features/auth/presentation/widgets/auth_texttfiled.dart';
+
+class RegisterView extends StatefulWidget {
+  static route() =>
+      MaterialPageRoute(builder: (context) => const RegisterView());
+  const RegisterView({super.key});
+
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          height: size.height,
+          width: size.width,
+          padding: EdgeInsets.all(size.width * 0.1),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Create a new!',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Enter your valid details credentials and register your account.',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  AuthTextFormField(
+                    controller: usernameController,
+                    hintText: 'Username',
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  AuthTextFormField(
+                    controller: emailController,
+                    hintText: 'Email',
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  AuthTextFormField(
+                    controller: phoneController,
+                    hintText: 'Phone',
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  AuthTextFormField(
+                    controller: passwordController,
+                    hintText: 'Password',
+                    obScureText: true,
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  CustomButton(
+                    size: size,
+                    lable: 'Register',
+                    lableColor: Theme.of(context).colorScheme.onSurface,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    onPressed: () {},
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomButton(
+                    size: size,
+                    lable: 'Back',
+                    lableColor: Theme.of(context).colorScheme.inversePrimary,
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
