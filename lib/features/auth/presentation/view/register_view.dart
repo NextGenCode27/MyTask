@@ -40,8 +40,8 @@ class _RegisterViewState extends State<RegisterView> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Navigator.of(context)
-                .pushAndRemoveUntil(HomeView.route(), (route) => false);
+            Navigator.of(context).pushAndRemoveUntil(
+                HomeView.route(state.user), (route) => false);
           }
           if (state is AuthFailed) {
             showSnackbar(context: context, content: state.message);
@@ -66,8 +66,9 @@ class _RegisterViewState extends State<RegisterView> {
                       Text(
                         'Create a new!',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
+                          color: Theme.of(context).colorScheme.onBackground,
                           fontSize: 30,
+                          letterSpacing: 2.0,
                         ),
                       ),
                       const SizedBox(
@@ -76,8 +77,12 @@ class _RegisterViewState extends State<RegisterView> {
                       Text(
                         'Enter your valid details credentials and register your account.',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
-                          fontSize: 18,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onBackground
+                              .withOpacity(0.5),
+                          fontSize: 16,
+                          letterSpacing: 2.0,
                         ),
                       ),
                     ],
@@ -120,7 +125,7 @@ class _RegisterViewState extends State<RegisterView> {
                       CustomButton(
                         size: size,
                         lable: 'Register',
-                        lableColor: Theme.of(context).colorScheme.onSurface,
+                        lableColor: Theme.of(context).colorScheme.onSecondary,
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -143,8 +148,7 @@ class _RegisterViewState extends State<RegisterView> {
                       CustomButton(
                         size: size,
                         lable: 'Back',
-                        lableColor:
-                            Theme.of(context).colorScheme.inversePrimary,
+                        lableColor: Theme.of(context).colorScheme.onSecondary,
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         onPressed: () {

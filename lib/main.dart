@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/secrets/storage_secrets.dart';
 import 'package:my_task/core/services/storage_service.dart';
-import 'package:my_task/core/themes/dark_theme.dart';
-import 'package:my_task/core/themes/theme_bloc/theme_bloc.dart';
+import 'package:my_task/core/themes/presentation/theme/dark_theme.dart';
+import 'package:my_task/core/themes/presentation/theme_bloc/theme_bloc.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_task/features/auth/presentation/view/welcome_view.dart';
+import 'package:my_task/features/home/presentation/bloc/home_bloc.dart';
+import 'package:my_task/features/home/presentation/views/home_view.dart';
 import 'package:my_task/init_dependencies.dart';
 
 void main() async {
@@ -18,6 +20,7 @@ void main() async {
       providers: [
         BlocProvider(create: (context) => serviceLocator<ThemeBloc>()),
         BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
+        BlocProvider(create: (context) => serviceLocator<HomeBloc>()),
       ],
       child: MyApp(
         isDatkTheme: isDarkTheme,
@@ -51,7 +54,19 @@ class _MyAppState extends State<MyApp> {
             title: 'M Y T A S K',
             theme: state.themeData,
             darkTheme: darkTheme,
-            home: const WelcomeView(),
+            home: BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is AuthLogOut) {
+                  return const WelcomeView();
+                }
+                if (state is AuthSuccess) {
+                  return HomeView(
+                    user: state.user,
+                  );
+                }
+                return const WelcomeView();
+              },
+            ),
           );
         }
         if (state is ThemeSetSuccess) {
@@ -60,7 +75,19 @@ class _MyAppState extends State<MyApp> {
             title: 'M Y T A S K',
             theme: state.themeData,
             darkTheme: darkTheme,
-            home: const WelcomeView(),
+            home: BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is AuthLogOut) {
+                  return const WelcomeView();
+                }
+                if (state is AuthSuccess) {
+                  return HomeView(
+                    user: state.user,
+                  );
+                }
+                return const WelcomeView();
+              },
+            ),
           );
         }
         return const SizedBox();

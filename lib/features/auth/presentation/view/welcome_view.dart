@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/global/widgets/app_icon.dart';
 import 'package:my_task/core/global/widgets/custom_button.dart';
-import 'package:my_task/core/themes/light_theme.dart';
-import 'package:my_task/core/themes/theme_bloc/theme_bloc.dart';
+import 'package:my_task/core/themes/presentation/theme/light_theme.dart';
+import 'package:my_task/core/themes/presentation/theme_bloc/theme_bloc.dart';
 import 'package:my_task/features/auth/presentation/view/login_view.dart';
 import 'package:my_task/features/auth/presentation/view/register_view.dart';
 
 class WelcomeView extends StatefulWidget {
+  static route() =>
+      MaterialPageRoute(builder: (context) => const WelcomeView());
   const WelcomeView({super.key});
 
   @override
@@ -78,9 +80,10 @@ class _WelcomeViewState extends State<WelcomeView> {
                 Text(
                   'Welcome to\nthe new\nTask App',
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: Theme.of(context).colorScheme.onBackground,
                     fontSize: 30,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 2.0,
                   ),
                 ),
                 const SizedBox(
@@ -91,8 +94,12 @@ class _WelcomeViewState extends State<WelcomeView> {
                 Text(
                   'New level of features\nwith new app',
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onBackground
+                        .withOpacity(0.7),
                     fontSize: 16,
+                    letterSpacing: 2.0,
                   ),
                 ),
               ],
@@ -137,7 +144,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                 CustomButton(
                   size: size,
                   lable: 'Become a member',
-                  lableColor: Theme.of(context).colorScheme.onSurface,
+                  lableColor: Theme.of(context).colorScheme.onPrimary,
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     Navigator.of(context).push(RegisterView.route());

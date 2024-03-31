@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/themes/domain/usecase/get_theme_usecase.dart';
 import 'package:my_task/core/themes/domain/usecase/set_theme_usecase.dart';
-import 'package:my_task/core/themes/light_theme.dart';
+import 'package:my_task/core/themes/presentation/theme/light_theme.dart';
 import 'package:my_task/core/usecase/usecase.dart';
 
 part 'theme_event.dart';

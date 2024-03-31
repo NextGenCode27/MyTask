@@ -36,8 +36,8 @@ class _LoginViewState extends State<LoginView> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Navigator.of(context)
-                .pushAndRemoveUntil(HomeView.route(), (route) => false);
+            Navigator.of(context).pushAndRemoveUntil(
+                HomeView.route(state.user), (route) => false);
           }
           if (state is AuthFailed) {
             showSnackbar(context: context, content: state.message);
@@ -62,8 +62,9 @@ class _LoginViewState extends State<LoginView> {
                       Text(
                         'Welcome Back!',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
+                          color: Theme.of(context).colorScheme.onBackground,
                           fontSize: 30,
+                          letterSpacing: 2.0,
                         ),
                       ),
                       const SizedBox(
@@ -72,8 +73,12 @@ class _LoginViewState extends State<LoginView> {
                       Text(
                         'Enter your registered credentials and login with your account.',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
-                          fontSize: 18,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onBackground
+                              .withOpacity(0.5),
+                          fontSize: 16,
+                          letterSpacing: 2.0,
                         ),
                       ),
                     ],
@@ -99,7 +104,16 @@ class _LoginViewState extends State<LoginView> {
                           onPressed: () {
                             Navigator.of(context).push(ForgotView.route());
                           },
-                          child: const Text('Forgot Password?'),
+                          child: Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onBackground
+                                  .withOpacity(0.7),
+                              letterSpacing: 2.0,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -109,7 +123,7 @@ class _LoginViewState extends State<LoginView> {
                       CustomButton(
                         size: size,
                         lable: 'Login',
-                        lableColor: Theme.of(context).colorScheme.onSurface,
+                        lableColor: Theme.of(context).colorScheme.onPrimary,
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -130,8 +144,7 @@ class _LoginViewState extends State<LoginView> {
                       CustomButton(
                         size: size,
                         lable: 'Back',
-                        lableColor:
-                            Theme.of(context).colorScheme.inversePrimary,
+                        lableColor: Theme.of(context).colorScheme.onSecondary,
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         onPressed: () {

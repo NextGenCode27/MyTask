@@ -17,9 +17,14 @@ final class AuthLoading extends AuthState {
 }
 
 final class AuthSuccess extends AuthState {
-  final String userId;
+  final User? user;
 
-  AuthSuccess({required this.userId});
+  AuthSuccess({required this.user});
+  @override
+  String toString() => 'Auth Auccess';
+}
+
+final class AuthLogOut extends AuthState {
   @override
   String toString() => 'Auth Auccess';
 }

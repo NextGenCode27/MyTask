@@ -11,16 +11,16 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({required this.authRemoteDatasource});
 
   @override
-  Future<Either<Failure, String>> login({
+  Future<Either<Failure, User?>> login({
     required String email,
     required String password,
   }) async {
     try {
-      final userId = await authRemoteDatasource.login(
+      final user = await authRemoteDatasource.login(
         email: email,
         password: password,
       );
-      return right(userId);
+      return right(user);
     } on AuthException catch (e) {
       return left(Failure(message: e.message));
     } on ServerException catch (e) {
@@ -29,20 +29,32 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> register({
+  Future<Either<Failure, User?>> register({
     required String username,
     required String email,
     required String phone,
     required String password,
   }) async {
     try {
-      final userId = await authRemoteDatasource.register(
+      final user = await authRemoteDatasource.register(
         username: username,
         email: email,
         phone: phone,
         password: password,
       );
-      return right(userId);
+      return right(user);
+    } on AuthException catch (e) {
+      return left(Failure(message: e.message));
+    } on ServerException catch (e) {
+      return left(Failure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> logOut() async {
+    try {
+      final user = await authRemoteDatasource.logOut();
+      return right(user);
     } on AuthException catch (e) {
       return left(Failure(message: e.message));
     } on ServerException catch (e) {
