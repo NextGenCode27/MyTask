@@ -32,8 +32,9 @@ class _ForgotViewState extends State<ForgotView> {
                   Text(
                     'Reset password!',
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
+                      color: Theme.of(context).colorScheme.onBackground,
                       fontSize: 30,
+                      letterSpacing: 2.0,
                     ),
                   ),
                   const SizedBox(
@@ -42,8 +43,12 @@ class _ForgotViewState extends State<ForgotView> {
                   Text(
                     'Enter your registered email adderess, we will send you a reset link.',
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
-                      fontSize: 18,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onBackground
+                          .withOpacity(0.5),
+                      fontSize: 16,
+                      letterSpacing: 2.0,
                     ),
                   ),
                 ],
@@ -60,7 +65,7 @@ class _ForgotViewState extends State<ForgotView> {
                   CustomButton(
                     size: size,
                     lable: 'Send Email',
-                    lableColor: Theme.of(context).colorScheme.onSurface,
+                    lableColor: Theme.of(context).colorScheme.onPrimary,
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {}
@@ -72,7 +77,7 @@ class _ForgotViewState extends State<ForgotView> {
                   CustomButton(
                     size: size,
                     lable: 'Back',
-                    lableColor: Theme.of(context).colorScheme.inversePrimary,
+                    lableColor: Theme.of(context).colorScheme.onSecondary,
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       Navigator.of(context).pop();

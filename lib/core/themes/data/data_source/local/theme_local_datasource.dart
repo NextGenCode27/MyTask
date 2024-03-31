@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_task/core/error/exception.dart';
 import 'package:my_task/core/secrets/storage_secrets.dart';
 import 'package:my_task/core/services/storage_service.dart';
-import 'package:my_task/core/themes/dark_theme.dart';
-import 'package:my_task/core/themes/light_theme.dart';
+import 'package:my_task/core/themes/presentation/theme/dark_theme.dart';
+import 'package:my_task/core/themes/presentation/theme/light_theme.dart';
 
 abstract interface class ThemeLocalDatasource {
   Future<ThemeData> toggleTheme();

@@ -21,3 +21,16 @@ final class AuthLoginEvent extends AuthEvent {
   @override
   String toString() => 'Auth Register Event';
 }
+
+final class IsUserLoggedInEvent extends AuthEvent {
+  final User? user;
+
+  IsUserLoggedInEvent({required this.user});
+  @override
+  String toString() => 'Auth Register Event';
+}
+
+final class AuthLogOutEvent extends AuthEvent {
+  @override
+  String toString() => 'Auth Register Event';
+}

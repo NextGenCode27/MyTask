@@ -30,8 +30,9 @@ class CustomButton extends StatelessWidget {
         lable,
         style: TextStyle(
           color: lableColor,
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.w700,
+          letterSpacing: 2.0,
         ),
       ),
     );

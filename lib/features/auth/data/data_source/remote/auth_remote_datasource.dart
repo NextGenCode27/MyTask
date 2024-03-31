@@ -2,16 +2,18 @@ import 'package:my_task/core/error/exception.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDatasource {
-  Future<String> login({
+  Future<User?> login({
     required String email,
     required String password,
   });
-  Future<String> register({
+  Future<User?> register({
     required String username,
     required String email,
     required String phone,
     required String password,
   });
+
+  Future<dynamic> logOut();
 }
 
 class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
@@ -20,7 +22,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   AuthRemoteDatasourceImpl({required this.supabaseClient});
 
   @override
-  Future<String> login({
+  Future<User?> login({
     required String email,
     required String password,
   }) async {
@@ -29,15 +31,15 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         email: email,
         password: password,
       );
-      final userId = response.user!.id;
-      return userId;
+      final user = response.user;
+      return user;
     } on ServerException catch (e) {
       throw ServerException(message: e.message);
     }
   }
 
   @override
-  Future<String> register({
+  Future<User?> register({
     required String username,
     required String email,
     required String phone,
@@ -51,7 +53,17 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         'phone': phone,
       },
     );
-    final userId = response.user!.id;
-    return userId;
+    final user = response.user;
+    return user;
+  }
+
+  @override
+  Future<dynamic> logOut() async {
+    try {
+      final response = await supabaseClient.auth.signOut();
+      return response;
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message);
+    }
   }
 }

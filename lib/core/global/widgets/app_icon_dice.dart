@@ -21,7 +21,7 @@ class AppIconDice extends StatelessWidget {
         child: Text(
           lable,
           style: TextStyle(
-            color: Theme.of(context).colorScheme.onPrimary,
+            color: Theme.of(context).colorScheme.background,
             fontSize: 16,
             fontWeight: FontWeight.w700,
           ),

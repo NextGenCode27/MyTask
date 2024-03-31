@@ -5,13 +5,15 @@ import 'package:my_task/core/themes/data/repository/theme_repository_impl.dart';
 import 'package:my_task/core/themes/domain/repository/them_repository.dart';
 import 'package:my_task/core/themes/domain/usecase/get_theme_usecase.dart';
 import 'package:my_task/core/themes/domain/usecase/set_theme_usecase.dart';
-import 'package:my_task/core/themes/theme_bloc/theme_bloc.dart';
+import 'package:my_task/core/themes/presentation/theme_bloc/theme_bloc.dart';
 import 'package:my_task/features/auth/data/data_source/remote/auth_remote_datasource.dart';
 import 'package:my_task/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:my_task/features/auth/domain/repository/auth_repository.dart';
 import 'package:my_task/features/auth/domain/usecase/login_usecase.dart';
+import 'package:my_task/features/auth/domain/usecase/logout_usecase.dart';
 import 'package:my_task/features/auth/domain/usecase/register_usecase.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_task/features/home/presentation/bloc/home_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 GetIt serviceLocator = GetIt.instance;
@@ -19,6 +21,7 @@ GetIt serviceLocator = GetIt.instance;
 Future<void> iniDependencies() async {
   _initTheme();
   _initAuth();
+  _initHome();
   final supabase = await Supabase.initialize(
     url: supabaseUrl,
     anonKey: supabaseAnonKey,
@@ -60,13 +63,24 @@ _initAuth() {
     ..registerFactory<LoginUsecase>(
       () => LoginUsecase(authRepository: serviceLocator()),
     )
-    ..registerFactory(
+    ..registerFactory<RegisterUsecas>(
       () => RegisterUsecas(authRepository: serviceLocator()),
+    )
+    ..registerFactory<LogOutUsecase>(
+      () => LogOutUsecase(authRepository: serviceLocator()),
     )
     ..registerLazySingleton(
       () => AuthBloc(
         loginUsecase: serviceLocator(),
         registerUsecas: serviceLocator(),
+        logOutUsecase: serviceLocator(),
+        supabaseClient: serviceLocator(),
       ),
     );
+}
+
+_initHome() {
+  serviceLocator.registerLazySingleton<HomeBloc>(
+    () => HomeBloc(),
+  );
 }
