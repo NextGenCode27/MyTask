@@ -76,7 +76,7 @@ class _LoginViewState extends State<LoginView> {
                           color: Theme.of(context)
                               .colorScheme
                               .onBackground
-                              .withOpacity(0.5),
+                              .withOpacity(0.7),
                           fontSize: 16,
                           letterSpacing: 2.0,
                         ),

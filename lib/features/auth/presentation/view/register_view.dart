@@ -80,7 +80,7 @@ class _RegisterViewState extends State<RegisterView> {
                           color: Theme.of(context)
                               .colorScheme
                               .onBackground
-                              .withOpacity(0.5),
+                              .withOpacity(0.7),
                           fontSize: 16,
                           letterSpacing: 2.0,
                         ),
@@ -125,7 +125,7 @@ class _RegisterViewState extends State<RegisterView> {
                       CustomButton(
                         size: size,
                         lable: 'Register',
-                        lableColor: Theme.of(context).colorScheme.onSecondary,
+                        lableColor: Theme.of(context).colorScheme.onPrimary,
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
