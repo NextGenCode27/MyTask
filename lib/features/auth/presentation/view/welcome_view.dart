@@ -29,6 +29,7 @@ class _WelcomeViewState extends State<WelcomeView> {
           children: [
             //dark mode icon
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 BlocBuilder<ThemeBloc, ThemeState>(
                   builder: (context, state) {
@@ -37,14 +38,18 @@ class _WelcomeViewState extends State<WelcomeView> {
                         onPressed: () {
                           context.read<ThemeBloc>().add(SetThemeEvent());
                         },
+                        style: IconButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                        ),
                         icon: state.themeData == lightTheme
                             ? Icon(
-                                Icons.dark_mode,
-                                color: Theme.of(context).colorScheme.secondary,
+                                Icons.light,
+                                color: Theme.of(context).colorScheme.background,
                               )
                             : Icon(
-                                Icons.light_mode_rounded,
-                                color: Theme.of(context).colorScheme.secondary,
+                                Icons.sunny,
+                                color: Theme.of(context).colorScheme.background,
                               ),
                       );
                     }
@@ -53,14 +58,18 @@ class _WelcomeViewState extends State<WelcomeView> {
                         onPressed: () {
                           context.read<ThemeBloc>().add(SetThemeEvent());
                         },
+                        style: IconButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                        ),
                         icon: state.themeData == lightTheme
                             ? Icon(
-                                Icons.dark_mode,
-                                color: Theme.of(context).colorScheme.secondary,
+                                Icons.light,
+                                color: Theme.of(context).colorScheme.background,
                               )
                             : Icon(
-                                Icons.light_mode_rounded,
-                                color: Theme.of(context).colorScheme.secondary,
+                                Icons.sunny,
+                                color: Theme.of(context).colorScheme.background,
                               ),
                       );
                     }
@@ -139,7 +148,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 CustomButton(
                   size: size,

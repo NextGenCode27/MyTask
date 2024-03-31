@@ -46,7 +46,7 @@ class _ForgotViewState extends State<ForgotView> {
                       color: Theme.of(context)
                           .colorScheme
                           .onBackground
-                          .withOpacity(0.5),
+                          .withOpacity(0.7),
                       fontSize: 16,
                       letterSpacing: 2.0,
                     ),
