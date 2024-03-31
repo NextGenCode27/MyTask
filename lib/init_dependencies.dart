@@ -6,6 +6,11 @@ import 'package:my_task/core/themes/domain/repository/them_repository.dart';
 import 'package:my_task/core/themes/domain/usecase/get_theme_usecase.dart';
 import 'package:my_task/core/themes/domain/usecase/set_theme_usecase.dart';
 import 'package:my_task/core/themes/presentation/theme_bloc/theme_bloc.dart';
+import 'package:my_task/core/user/bloc/user_bloc.dart';
+import 'package:my_task/core/user/data/data_source/remote/user_remote_datasource.dart';
+import 'package:my_task/core/user/data/repository/user_repository_impl.dart';
+import 'package:my_task/core/user/domain/repository/user_repository.dart';
+import 'package:my_task/core/user/domain/usecase/get_userdata_usecase.dart';
 import 'package:my_task/features/auth/data/data_source/remote/auth_remote_datasource.dart';
 import 'package:my_task/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:my_task/features/auth/domain/repository/auth_repository.dart';
@@ -22,6 +27,7 @@ Future<void> iniDependencies() async {
   _initTheme();
   _initAuth();
   _initHome();
+  _initUser();
   final supabase = await Supabase.initialize(
     url: supabaseUrl,
     anonKey: supabaseAnonKey,
@@ -83,4 +89,20 @@ _initHome() {
   serviceLocator.registerLazySingleton<HomeBloc>(
     () => HomeBloc(),
   );
+}
+
+_initUser() {
+  serviceLocator
+    ..registerFactory<UserRemoteDatasource>(
+      () => UserRemoteDatasourceImpl(supabaseClient: serviceLocator()),
+    )
+    ..registerFactory<UserRepository>(
+      () => UserRepositoryImpl(userRemoteDatasource: serviceLocator()),
+    )
+    ..registerFactory<GetCurrentUserDataUsecase>(
+      () => GetCurrentUserDataUsecase(userRepository: serviceLocator()),
+    )
+    ..registerLazySingleton<UserBloc>(
+      () => UserBloc(getCurrentUserDataUsecase: serviceLocator()),
+    );
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:my_task/core/global/widgets/loader.dart';
 import 'package:my_task/core/themes/presentation/theme/colors.dart';
+import 'package:my_task/core/user/bloc/user_bloc.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart' as auth;
 import 'package:my_task/features/auth/presentation/view/welcome_view.dart';
 import 'package:my_task/features/home/presentation/bloc/home_bloc.dart';
@@ -24,15 +24,17 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int currentIndex = 0;
+
   @override
   void initState() {
     super.initState();
+    context.read<UserBloc>().add(GetCurrentUserDataEvent());
     context.read<HomeBloc>().add(HomeCurrentIndexEvent(currentIndex: 0));
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
     return BlocConsumer<auth.AuthBloc, auth.AuthState>(
       listener: (context, state) {
         if (state is auth.AuthLogOut) {

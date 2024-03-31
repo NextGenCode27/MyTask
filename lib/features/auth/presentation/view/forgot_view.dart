@@ -65,7 +65,6 @@ class _ForgotViewState extends State<ForgotView> {
                   CustomButton(
                     size: size,
                     lable: 'Send Email',
-                    lableColor: Theme.of(context).colorScheme.onPrimary,
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {}
@@ -77,7 +76,7 @@ class _ForgotViewState extends State<ForgotView> {
                   CustomButton(
                     size: size,
                     lable: 'Back',
-                    lableColor: Theme.of(context).colorScheme.onSecondary,
+                    lableColor: Theme.of(context).colorScheme.background,
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       Navigator.of(context).pop();
