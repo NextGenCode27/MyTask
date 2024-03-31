@@ -123,7 +123,6 @@ class _LoginViewState extends State<LoginView> {
                       CustomButton(
                         size: size,
                         lable: 'Login',
-                        lableColor: Theme.of(context).colorScheme.onPrimary,
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -144,7 +143,7 @@ class _LoginViewState extends State<LoginView> {
                       CustomButton(
                         size: size,
                         lable: 'Back',
-                        lableColor: Theme.of(context).colorScheme.onSecondary,
+                        lableColor: Theme.of(context).colorScheme.background,
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         onPressed: () {

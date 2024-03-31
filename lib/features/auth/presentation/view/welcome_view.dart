@@ -124,7 +124,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                       child: CustomButton(
                         size: size,
                         lable: 'Log In',
-                        lableColor: Theme.of(context).colorScheme.onSecondary,
+                        lableColor: Theme.of(context).colorScheme.background,
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         onPressed: () {
@@ -139,7 +139,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                       child: CustomButton(
                         size: size,
                         lable: '?',
-                        lableColor: Theme.of(context).colorScheme.onSecondary,
+                        lableColor: Theme.of(context).colorScheme.background,
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         onPressed: () {},
@@ -153,7 +153,6 @@ class _WelcomeViewState extends State<WelcomeView> {
                 CustomButton(
                   size: size,
                   lable: 'Become a member',
-                  lableColor: Theme.of(context).colorScheme.onPrimary,
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     Navigator.of(context).push(RegisterView.route());

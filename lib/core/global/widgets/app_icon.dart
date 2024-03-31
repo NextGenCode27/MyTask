@@ -21,6 +21,7 @@ class AppIcon extends StatelessWidget {
             ),
             AppIconDice(
               lable: 'A',
+              lableColor: Theme.of(context).colorScheme.background,
               backgroundColor: Theme.of(context).colorScheme.secondary,
             ),
           ],
@@ -32,6 +33,7 @@ class AppIcon extends StatelessWidget {
           children: [
             AppIconDice(
               lable: 'S',
+              lableColor: Theme.of(context).colorScheme.background,
               backgroundColor: Theme.of(context).colorScheme.secondary,
             ),
             const SizedBox(

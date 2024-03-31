@@ -4,6 +4,7 @@ import 'package:my_task/core/secrets/storage_secrets.dart';
 import 'package:my_task/core/services/storage_service.dart';
 import 'package:my_task/core/themes/presentation/theme/dark_theme.dart';
 import 'package:my_task/core/themes/presentation/theme_bloc/theme_bloc.dart';
+import 'package:my_task/core/user/bloc/user_bloc.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_task/features/auth/presentation/view/welcome_view.dart';
 import 'package:my_task/features/home/presentation/bloc/home_bloc.dart';
@@ -20,6 +21,7 @@ void main() async {
       providers: [
         BlocProvider(create: (context) => serviceLocator<ThemeBloc>()),
         BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
+        BlocProvider(create: (context) => serviceLocator<UserBloc>()),
         BlocProvider(create: (context) => serviceLocator<HomeBloc>()),
       ],
       child: MyApp(

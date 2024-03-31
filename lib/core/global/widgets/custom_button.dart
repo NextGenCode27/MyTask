@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:my_task/core/themes/presentation/theme/colors.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.size,
     required this.lable,
-    required this.lableColor,
+    this.lableColor = whiteColor,
     required this.backgroundColor,
     required this.onPressed,
   });
 
   final Size size;
   final String lable;
-  final Color lableColor;
+  final Color? lableColor;
   final Color backgroundColor;
   final VoidCallback onPressed;
 
