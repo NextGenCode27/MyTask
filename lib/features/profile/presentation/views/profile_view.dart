@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:my_task/core/global/widgets/custom_button.dart';
-import 'package:my_task/core/user/bloc/user_bloc.dart';
+import 'package:my_task/core/global/widgets/buttons/custom_elevated_button.dart';
+import 'package:my_task/core/global_features/user/bloc/user_bloc.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_task/features/profile/presentation/widgets/profile_listtile.dart';
 import 'package:my_task/features/profile/presentation/widgets/profile_card.dart';
@@ -75,7 +75,7 @@ class ProfileView extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                CustomButton(
+                CustomElevatedButton(
                   size: size,
                   lable: 'Log Out',
                   backgroundColor: Theme.of(context).primaryColor,

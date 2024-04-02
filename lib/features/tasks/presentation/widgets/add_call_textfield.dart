@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 
-class AuthTextFormField extends StatelessWidget {
-  const AuthTextFormField({
+class AddCallTextFormField extends StatelessWidget {
+  const AddCallTextFormField({
     super.key,
     required this.hintText,
     required this.controller,
-    this.obScureText = false,
   });
-
   final String hintText;
   final TextEditingController controller;
-  final bool obScureText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: Theme.of(context).colorScheme.onBackground,
       decoration: InputDecoration(
         border: InputBorder.none,
         enabledBorder: OutlineInputBorder(
@@ -46,17 +42,13 @@ class AuthTextFormField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+          letterSpacing: 2.0,
         ),
       ),
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
-      obscureText: obScureText,
-      style: TextStyle(
-        color: Theme.of(context).colorScheme.onBackground,
-        letterSpacing: 2.0,
-      ),
       validator: (value) {
         if (value!.isEmpty) {
-          return '$hintText can not be empty.';
+          return '$hintText can not be empty';
         }
         return null;
       },

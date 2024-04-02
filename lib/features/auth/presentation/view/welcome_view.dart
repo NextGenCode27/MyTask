@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_task/core/global/widgets/app_icon.dart';
-import 'package:my_task/core/global/widgets/custom_button.dart';
-import 'package:my_task/core/themes/presentation/theme/light_theme.dart';
-import 'package:my_task/core/themes/presentation/theme_bloc/theme_bloc.dart';
+import 'package:my_task/core/global/widgets/app/app_icon.dart';
+import 'package:my_task/core/global/widgets/buttons/custom_elevated_button.dart';
+import 'package:my_task/core/global_features/themes/presentation/theme/light_theme.dart';
+import 'package:my_task/core/global_features/themes/presentation/theme_bloc/theme_bloc.dart';
 import 'package:my_task/features/auth/presentation/view/login_view.dart';
 import 'package:my_task/features/auth/presentation/view/register_view.dart';
 
@@ -121,7 +121,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                   children: [
                     Expanded(
                       flex: 3,
-                      child: CustomButton(
+                      child: CustomElevatedButton(
                         size: size,
                         lable: 'Log In',
                         lableColor: Theme.of(context).colorScheme.background,
@@ -136,7 +136,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                       width: 10,
                     ),
                     Expanded(
-                      child: CustomButton(
+                      child: CustomElevatedButton(
                         size: size,
                         lable: '?',
                         lableColor: Theme.of(context).colorScheme.background,
@@ -150,7 +150,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                 const SizedBox(
                   height: 30,
                 ),
-                CustomButton(
+                CustomElevatedButton(
                   size: size,
                   lable: 'Become a member',
                   backgroundColor: Theme.of(context).colorScheme.primary,

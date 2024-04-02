@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/secrets/storage_secrets.dart';
 import 'package:my_task/core/services/storage_service.dart';
-import 'package:my_task/core/themes/presentation/theme/dark_theme.dart';
-import 'package:my_task/core/themes/presentation/theme_bloc/theme_bloc.dart';
-import 'package:my_task/core/user/bloc/user_bloc.dart';
+import 'package:my_task/core/global_features/themes/presentation/theme/dark_theme.dart';
+import 'package:my_task/core/global_features/themes/presentation/theme_bloc/theme_bloc.dart';
+import 'package:my_task/core/global_features/user/bloc/user_bloc.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_task/features/auth/presentation/view/welcome_view.dart';
 import 'package:my_task/features/home/presentation/bloc/home_bloc.dart';
 import 'package:my_task/features/home/presentation/views/home_view.dart';
+import 'package:my_task/features/tasks/presentation/bloc/task_bloc.dart';
 import 'package:my_task/init_dependencies.dart';
 
 void main() async {
@@ -23,6 +24,7 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (context) => serviceLocator<UserBloc>()),
         BlocProvider(create: (context) => serviceLocator<HomeBloc>()),
+        BlocProvider(create: (context) => serviceLocator<TaskBloc>()),
       ],
       child: MyApp(
         isDatkTheme: isDarkTheme,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/global/utils/snackbar.dart';
-import 'package:my_task/core/global/widgets/custom_button.dart';
-import 'package:my_task/core/global/widgets/loader.dart';
+import 'package:my_task/core/global/widgets/buttons/custom_elevated_button.dart';
+import 'package:my_task/core/global/widgets/widgets/loader.dart';
 import 'package:my_task/features/auth/domain/usecase/register_usecase.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_task/features/auth/presentation/widgets/auth_texttfiled.dart';
@@ -122,7 +122,7 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   Column(
                     children: [
-                      CustomButton(
+                      CustomElevatedButton(
                         size: size,
                         lable: 'Register',
                         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -144,7 +144,7 @@ class _RegisterViewState extends State<RegisterView> {
                       const SizedBox(
                         height: 20,
                       ),
-                      CustomButton(
+                      CustomElevatedButton(
                         size: size,
                         lable: 'Back',
                         lableColor: Theme.of(context).colorScheme.background,
