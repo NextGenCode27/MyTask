@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/global/utils/snackbar.dart';
-import 'package:my_task/core/global/widgets/custom_button.dart';
-import 'package:my_task/core/global/widgets/loader.dart';
+import 'package:my_task/core/global/widgets/buttons/custom_elevated_button.dart';
+import 'package:my_task/core/global/widgets/widgets/loader.dart';
 import 'package:my_task/features/auth/domain/usecase/login_usecase.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_task/features/auth/presentation/view/forgot_view.dart';
@@ -120,7 +120,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   Column(
                     children: [
-                      CustomButton(
+                      CustomElevatedButton(
                         size: size,
                         lable: 'Login',
                         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -140,7 +140,7 @@ class _LoginViewState extends State<LoginView> {
                       const SizedBox(
                         height: 20,
                       ),
-                      CustomButton(
+                      CustomElevatedButton(
                         size: size,
                         lable: 'Back',
                         lableColor: Theme.of(context).colorScheme.background,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_task/core/global/widgets/loader.dart';
-import 'package:my_task/core/themes/presentation/theme/colors.dart';
-import 'package:my_task/core/user/bloc/user_bloc.dart';
+import 'package:my_task/core/global/widgets/widgets/loader.dart';
+import 'package:my_task/core/global_features/user/bloc/user_bloc.dart';
 import 'package:my_task/features/auth/presentation/bloc/auth_bloc.dart' as auth;
 import 'package:my_task/features/auth/presentation/view/welcome_view.dart';
+import 'package:my_task/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:my_task/features/home/presentation/bloc/home_bloc.dart';
 import 'package:my_task/features/profile/presentation/views/profile_view.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -34,7 +34,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
     return BlocConsumer<auth.AuthBloc, auth.AuthState>(
       listener: (context, state) {
         if (state is auth.AuthLogOut) {
@@ -74,14 +73,14 @@ class _HomeViewState extends State<HomeView> {
                         .colorScheme
                         .secondary
                         .withOpacity(0.5),
-                    // showSelectedLabels: false,
-                    // showUnselectedLabels: false,
                     iconSize: 25,
                     onTap: (value) {
                       context
                           .read<HomeBloc>()
                           .add(HomeCurrentIndexEvent(currentIndex: value));
                     },
+                    showSelectedLabels: false,
+                    showUnselectedLabels: false,
                     items: const [
                       BottomNavigationBarItem(
                         icon: Icon(Icons.dashboard),
@@ -104,13 +103,6 @@ class _HomeViewState extends State<HomeView> {
 }
 
 List<Widget> views = [
-  const Center(
-    child: Text(
-      'Home View',
-      style: TextStyle(
-        color: blackColor,
-      ),
-    ),
-  ),
+  const DashboardView(),
   const ProfileView(),
 ];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_task/core/global/widgets/custom_button.dart';
+import 'package:my_task/core/global/widgets/buttons/custom_elevated_button.dart';
 import 'package:my_task/features/auth/presentation/widgets/auth_texttfiled.dart';
 
 class ForgotView extends StatefulWidget {
@@ -62,7 +62,7 @@ class _ForgotViewState extends State<ForgotView> {
               ),
               Column(
                 children: [
-                  CustomButton(
+                  CustomElevatedButton(
                     size: size,
                     lable: 'Send Email',
                     backgroundColor: Theme.of(context).colorScheme.primary,
@@ -73,7 +73,7 @@ class _ForgotViewState extends State<ForgotView> {
                   const SizedBox(
                     height: 20,
                   ),
-                  CustomButton(
+                  CustomElevatedButton(
                     size: size,
                     lable: 'Back',
                     lableColor: Theme.of(context).colorScheme.background,
