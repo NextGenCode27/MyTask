@@ -5,15 +5,19 @@ class CustomElevatedIconButton extends StatelessWidget {
   const CustomElevatedIconButton({
     super.key,
     required this.backgroundColor,
+    this.lableColor = whiteColor,
     required this.lable,
     required this.onPressed,
     required this.icon,
+    this.iconColor = whiteColor,
   });
 
   final Color backgroundColor;
   final String lable;
+  final Color? lableColor;
   final VoidCallback onPressed;
   final IconData icon;
+  final Color iconColor;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -28,11 +32,14 @@ class CustomElevatedIconButton extends StatelessWidget {
       ),
       icon: Icon(
         icon,
-        color: whiteColor,
+        color: iconColor,
       ),
       label: Text(
         lable,
-        style: const TextStyle(color: whiteColor, letterSpacing: 2.0),
+        style: TextStyle(
+          color: lableColor,
+          letterSpacing: 2.0,
+        ),
       ),
     );
   }
