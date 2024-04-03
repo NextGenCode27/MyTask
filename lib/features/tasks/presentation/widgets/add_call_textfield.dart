@@ -13,6 +13,8 @@ class AddCallTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      cursorColor: Theme.of(context).colorScheme.onBackground,
+      style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
       decoration: InputDecoration(
         border: InputBorder.none,
         enabledBorder: OutlineInputBorder(

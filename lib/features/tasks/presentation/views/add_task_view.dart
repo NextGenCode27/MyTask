@@ -129,8 +129,10 @@ class _AddTaskViewState extends State<AddTaskView> {
                         child: CustomElevatedIconButton(
                           backgroundColor:
                               Theme.of(context).colorScheme.secondary,
+                          lableColor: Theme.of(context).colorScheme.background,
                           lable: 'Cancel',
                           icon: Icons.clear,
+                          iconColor: Theme.of(context).colorScheme.background,
                           onPressed: () {},
                         ),
                       ),
