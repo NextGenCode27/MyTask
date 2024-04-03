@@ -40,8 +40,8 @@ class _RegisterViewState extends State<RegisterView> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Navigator.of(context).pushAndRemoveUntil(
-                HomeView.route(state.user), (route) => false);
+            Navigator.of(context)
+                .pushAndRemoveUntil(HomeView.route(), (route) => false);
           }
           if (state is AuthFailed) {
             showSnackbar(context: context, content: state.message);

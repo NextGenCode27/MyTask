@@ -7,6 +7,7 @@ abstract class TaskEntity {
   final String problemReported;
   final String assignTo;
   final bool isCompleted;
+  final DateTime updatedAt;
 
   TaskEntity({
     required this.id,
@@ -17,5 +18,6 @@ abstract class TaskEntity {
     required this.problemReported,
     required this.assignTo,
     required this.isCompleted,
+    required this.updatedAt,
   });
 }

@@ -23,6 +23,7 @@ import 'package:my_task/features/tasks/data/data_source/remote/task_remote_datas
 import 'package:my_task/features/tasks/data/repository/task_repository_impl.dart';
 import 'package:my_task/features/tasks/domain/repository/task_repository.dart';
 import 'package:my_task/features/tasks/domain/usecase/add_task_usecase.dart';
+import 'package:my_task/features/tasks/domain/usecase/fetch_task.dart';
 import 'package:my_task/features/tasks/presentation/bloc/task_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -127,7 +128,13 @@ _addTaskInit() {
     ..registerFactory<AddTaskUsecase>(
       () => AddTaskUsecase(taskRepository: serviceLocator()),
     )
+    ..registerFactory<FetchTaskUsecase>(
+      () => FetchTaskUsecase(taskRepository: serviceLocator()),
+    )
     ..registerLazySingleton<TaskBloc>(
-      () => TaskBloc(addTaskUsecase: serviceLocator()),
+      () => TaskBloc(
+        addTaskUsecase: serviceLocator(),
+        fetchTaskUsecase: serviceLocator(),
+      ),
     );
 }

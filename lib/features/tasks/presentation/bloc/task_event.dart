@@ -11,3 +11,5 @@ final class AddTaskEvent extends TaskEvent {
 
   AddTaskEvent({required this.addTaskParams});
 }
+
+final class FetchTaskEvent extends TaskEvent {}

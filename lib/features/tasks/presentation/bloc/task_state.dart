@@ -16,11 +16,19 @@ final class TaskLoading extends TaskState {
   String toString() => 'Task Loading';
 }
 
-final class TaskAddSuccess extends TaskState {
-  TaskAddSuccess();
+final class TaskSuccess extends TaskState {
+  final List<TaskEntity> taskEntity;
+
+  TaskSuccess({required this.taskEntity});
   @override
-  String toString() => 'Task Add Success';
+  String toString() => 'Task Fetch Success';
 }
+
+// final class TaskAddSuccess extends TaskState {
+//   TaskAddSuccess();
+//   @override
+//   String toString() => 'Task Add Success';
+// }
 
 final class TaskFailed extends TaskState {
   final String message;
