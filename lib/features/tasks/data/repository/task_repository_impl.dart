@@ -17,7 +17,7 @@ class TaskRepositoryImpl implements TaskRepository {
     required this.supabaseClient,
   });
   @override
-  Future<Either<Failure, TaskEntity>> addTask({
+  Future<Either<Failure, List<TaskEntity>>> addTask({
     required String username,
     required String location,
     required String department,
@@ -25,19 +25,32 @@ class TaskRepositoryImpl implements TaskRepository {
     required String assignTo,
   }) async {
     try {
-      final newTask = await taskRemoteDatasource.addTask(TaskModel(
-        id: const Uuid().v4(),
-        userId: supabaseClient.auth.currentUser!.id,
-        username: username,
-        location: location,
-        department: department,
-        problemReported: problemReported,
-        assignTo: assignTo,
-        isCompleted: false,
-      ));
+      final newTask = await taskRemoteDatasource.addTask(
+        TaskModel(
+          id: const Uuid().v4(),
+          userId: supabaseClient.auth.currentUser!.id,
+          username: username,
+          location: location,
+          department: department,
+          problemReported: problemReported,
+          assignTo: assignTo,
+          isCompleted: false,
+          updatedAt: DateTime.now(),
+        ),
+      );
       return right(newTask);
     } on ServerException catch (e) {
       return left(Failure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TaskEntity>>> fetchTaskList() async {
+    try {
+      final taskList = await taskRemoteDatasource.fetchTask();
+      return right(taskList);
+    } on ServerException catch (e) {
+      return Left(Failure(message: e.message));
     }
   }
 }

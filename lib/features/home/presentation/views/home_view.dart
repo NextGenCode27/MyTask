@@ -7,16 +7,13 @@ import 'package:my_task/features/auth/presentation/view/welcome_view.dart';
 import 'package:my_task/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:my_task/features/home/presentation/bloc/home_bloc.dart';
 import 'package:my_task/features/profile/presentation/views/profile_view.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:my_task/features/tasks/presentation/views/task_view.dart';
 
 class HomeView extends StatefulWidget {
-  static route(User? user) => MaterialPageRoute(
-        builder: (context) => HomeView(
-          user: user,
-        ),
+  static route() => MaterialPageRoute(
+        builder: (context) => const HomeView(),
       );
-  const HomeView({super.key, this.user});
-  final User? user;
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -87,6 +84,10 @@ class _HomeViewState extends State<HomeView> {
                         label: 'Dashboard',
                       ),
                       BottomNavigationBarItem(
+                        icon: Icon(Icons.task),
+                        label: 'Tasks',
+                      ),
+                      BottomNavigationBarItem(
                         icon: Icon(Icons.person),
                         label: 'Profile',
                       ),
@@ -104,5 +105,6 @@ class _HomeViewState extends State<HomeView> {
 
 List<Widget> views = [
   const DashboardView(),
+  const TaskView(),
   const ProfileView(),
 ];

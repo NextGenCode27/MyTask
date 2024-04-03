@@ -64,9 +64,7 @@ class _MyAppState extends State<MyApp> {
                   return const WelcomeView();
                 }
                 if (state is AuthSuccess) {
-                  return HomeView(
-                    user: state.user,
-                  );
+                  return const HomeView();
                 }
                 return const WelcomeView();
               },
@@ -85,9 +83,7 @@ class _MyAppState extends State<MyApp> {
                   return const WelcomeView();
                 }
                 if (state is AuthSuccess) {
-                  return HomeView(
-                    user: state.user,
-                  );
+                  return const HomeView();
                 }
                 return const WelcomeView();
               },

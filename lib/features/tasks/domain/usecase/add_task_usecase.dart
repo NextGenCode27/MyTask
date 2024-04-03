@@ -1,14 +1,15 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:my_task/core/error/error.dart';
 import 'package:my_task/core/usecase/usecase.dart';
+import 'package:my_task/features/tasks/domain/enitity/task_entity.dart';
 import 'package:my_task/features/tasks/domain/repository/task_repository.dart';
 
-class AddTaskUsecase implements Usecase<void, AddTaskParams> {
+class AddTaskUsecase implements Usecase<List<TaskEntity>, AddTaskParams> {
   final TaskRepository taskRepository;
 
   AddTaskUsecase({required this.taskRepository});
   @override
-  Future<Either<Failure, void>> call(AddTaskParams params) async {
+  Future<Either<Failure, List<TaskEntity>>> call(AddTaskParams params) async {
     return await taskRepository.addTask(
       username: params.username,
       location: params.location,

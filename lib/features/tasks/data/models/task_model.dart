@@ -10,6 +10,7 @@ class TaskModel extends TaskEntity {
     required super.problemReported,
     required super.assignTo,
     required super.isCompleted,
+    required super.updatedAt,
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> map) {
@@ -22,6 +23,9 @@ class TaskModel extends TaskEntity {
       problemReported: map['problem_reported'] as String,
       assignTo: map['assign_to'] as String,
       isCompleted: map['is_complete'] as bool,
+      updatedAt: map['updated_at'] == null
+          ? DateTime.now()
+          : DateTime.parse(map['updated_at']),
     );
   }
 
@@ -35,6 +39,7 @@ class TaskModel extends TaskEntity {
       'problem_reported': problemReported,
       'assign_to': assignTo,
       'is_complete': isCompleted,
+      'updated_at': updatedAt.toIso8601String(),
     };
   }
 
@@ -47,6 +52,7 @@ class TaskModel extends TaskEntity {
     required String? problemReported,
     required String? assignTo,
     required bool? isCompleted,
+    required DateTime? updatedAt,
   }) {
     return TaskModel(
       id: id ?? this.id,
@@ -57,6 +63,7 @@ class TaskModel extends TaskEntity {
       problemReported: problemReported ?? this.problemReported,
       assignTo: assignTo ?? this.assignTo,
       isCompleted: isCompleted ?? this.isCompleted,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }

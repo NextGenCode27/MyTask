@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/global/utils/snackbar.dart';
 import 'package:my_task/core/global/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:my_task/core/global/widgets/widgets/loader.dart';
-import 'package:my_task/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:my_task/features/home/presentation/views/home_view.dart';
 import 'package:my_task/features/tasks/domain/usecase/add_task_usecase.dart';
 import 'package:my_task/features/tasks/presentation/bloc/task_bloc.dart';
 import 'package:my_task/features/tasks/presentation/widgets/add_call_textfield.dart';
@@ -60,9 +60,9 @@ class _AddTaskViewState extends State<AddTaskView> {
       ),
       body: BlocConsumer<TaskBloc, TaskState>(
         listener: (context, state) {
-          if (state is TaskAddSuccess) {
+          if (state is TaskSuccess) {
             Navigator.of(context)
-                .pushAndRemoveUntil(DashboardView.route(), (route) => false);
+                .pushAndRemoveUntil(HomeView.route(), (route) => false);
           }
 
           if (state is TaskFailed) {
