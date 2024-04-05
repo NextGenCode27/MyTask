@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_task/core/global/widgets/widgets/loader.dart';
-import 'package:my_task/core/global_features/themes/presentation/theme/colors.dart';
 import 'package:my_task/features/tasks/presentation/bloc/task_bloc.dart';
+import 'package:my_task/features/tasks/presentation/widgets/task_card.dart';
 
 class TaskView extends StatefulWidget {
   const TaskView({super.key});
@@ -33,15 +33,24 @@ class _TaskViewState extends State<TaskView> {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          'All Calls',
-                          style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onBackground
-                                .withOpacity(0.5),
-                          ),
+                        DropdownButton(
+                          onTap: () {},
+                          isDense: true,
+                          borderRadius: BorderRadius.circular(8),
+                          value: 0,
+                          items: const [
+                            DropdownMenuItem(
+                              value: 0,
+                              child: Text('All Calls'),
+                            ),
+                            DropdownMenuItem(
+                              value: 1,
+                              child: Text('My Calls'),
+                            ),
+                          ],
+                          onChanged: (value) {},
                         ),
                       ],
                     ),
@@ -51,84 +60,12 @@ class _TaskViewState extends State<TaskView> {
                       physics: const BouncingScrollPhysics(),
                       itemCount: state.taskEntity.length,
                       itemBuilder: (contex, index) {
-                        return Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 20),
-                          padding: const EdgeInsets.all(30),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.7),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                state.taskEntity[index].username,
-                                style: const TextStyle(
-                                  color: whiteColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 2.0,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        state.taskEntity[index].location,
-                                        style: TextStyle(
-                                          color: whiteColor.withOpacity(0.5),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: 2.0,
-                                        ),
-                                      ),
-                                      Text(
-                                        state.taskEntity[index].department,
-                                        style: TextStyle(
-                                          color: whiteColor.withOpacity(0.5),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: 2.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        'Assign To',
-                                        style: TextStyle(
-                                          color: whiteColor.withOpacity(0.5),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: 2.0,
-                                        ),
-                                      ),
-                                      Text(
-                                        state.taskEntity[index].assignTo,
-                                        style: TextStyle(
-                                          color: whiteColor.withOpacity(0.8),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: 2.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                        final user = state.taskEntity[index];
+                        return TaskCard(
+                          username: user.username,
+                          location: user.location,
+                          department: user.department,
+                          assignTo: user.assignTo,
                         );
                       },
                     ),

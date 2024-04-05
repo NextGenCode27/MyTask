@@ -135,6 +135,7 @@ _addTaskInit() {
       () => TaskBloc(
         addTaskUsecase: serviceLocator(),
         fetchTaskUsecase: serviceLocator(),
+        fetchCurrentUserTaskUsecase: serviceLocator(),
       ),
     );
 }

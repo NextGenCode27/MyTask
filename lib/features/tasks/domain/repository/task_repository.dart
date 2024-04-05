@@ -12,4 +12,5 @@ abstract interface class TaskRepository {
   });
 
   Future<Either<Failure, List<TaskEntity>>> fetchTaskList();
+  Future<Either<Failure, List<TaskEntity>>> fetchCurrentUserTaskList();
 }
