@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 abstract interface class TaskRemoteDatasource {
   Future<List<TaskModel>> addTask(TaskModel taskModel);
   Future<List<TaskModel>> fetchTask();
+  Future<List<TaskModel>> fetchCurrentUserTask();
 }
 
 class TaskRemoteDatasourceImpl extends TaskRemoteDatasource {
@@ -34,6 +35,22 @@ class TaskRemoteDatasourceImpl extends TaskRemoteDatasource {
           .from('tasks')
           .select()
           .order('updated_at', ascending: false);
+      final List<TaskModel> taskList =
+          taskData.map((e) => TaskModel.fromJson(e)).toList();
+      return taskList;
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message);
+    }
+  }
+
+  @override
+  Future<List<TaskModel>> fetchCurrentUserTask() async {
+    try {
+      final taskData = await supabaseClient
+          .from('tasks')
+          .select()
+          .eq('user_id', supabaseClient.auth.currentUser!.id);
+
       final List<TaskModel> taskList =
           taskData.map((e) => TaskModel.fromJson(e)).toList();
       return taskList;

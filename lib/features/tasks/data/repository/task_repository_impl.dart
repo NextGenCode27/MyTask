@@ -53,4 +53,14 @@ class TaskRepositoryImpl implements TaskRepository {
       return Left(Failure(message: e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, List<TaskEntity>>> fetchCurrentUserTaskList() async {
+    try {
+      final taskList = await taskRemoteDatasource.fetchCurrentUserTask();
+      return right(taskList);
+    } on ServerException catch (e) {
+      return left(Failure(message: e.message));
+    }
+  }
 }
